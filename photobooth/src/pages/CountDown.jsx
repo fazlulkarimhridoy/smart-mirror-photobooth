@@ -8,6 +8,8 @@ import Bg from "../assets/New folder/Asset 7@2x.png";
 import axios from "axios";
 import { RingLoader } from "react-spinners";
 import QRCode from "react-qr-code";
+import { TbReload } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
 
 const CountDown = () => {
     const videoRef = useRef(null);
@@ -17,6 +19,7 @@ const CountDown = () => {
     const [showLoader, setShowLoader] = useState(false);
     const [showQRCode, setShowQRCode] = useState(false);
     const [qrValue, setQrValue] = useState("");
+    const navigate = useNavigate();
     // const [bgImageUrl, setBgImageUrl] = useState(Bg);
 
     // Countdown logic
@@ -170,6 +173,11 @@ const CountDown = () => {
         reader.readAsDataURL(file);
     };
 
+    // navigate to home
+    const handleToHome = () =>{
+        navigate("/");
+    }
+
     // style to change bacground image
     // const bgStyle = {
     //     backgroundImage: `url(${Bg})`,
@@ -221,28 +229,33 @@ const CountDown = () => {
 
             {/* show qr after getting the preview image of removed bg */}
             {showQRCode && (
-                <div
-                    className="absolute top-40 left-40"
-                    style={{
-                        height: "auto",
-                        margin: "0 auto",
-                        maxWidth: 100,
-                        width: "100%",
-                    }}
-                >
-                    <QRCode
-                        fgColor={"#000000"}
-                        bgColor={"#645411"}
-                        size={256}
+                <>
+                    <div
+                        className="absolute top-40 left-40"
                         style={{
                             height: "auto",
-                            maxWidth: "100%",
+                            margin: "0 auto",
+                            maxWidth: 100,
                             width: "100%",
                         }}
-                        value={qrValue}
-                        viewBox={`0 0 256 256`}
-                    />
-                </div>
+                    >
+                        <QRCode
+                            fgColor={"#000000"}
+                            bgColor={"#645411"}
+                            size={256}
+                            style={{
+                                height: "auto",
+                                maxWidth: "100%",
+                                width: "100%",
+                            }}
+                            value={qrValue}
+                            viewBox={`0 0 256 256`}
+                        />
+                    </div>
+                    <div onClick={handleToHome} className="absolute top-5 right-5">
+                        <TbReload color="#F2E3AA" size={30} />
+                    </div>
+                </>
             )}
         </section>
     );
