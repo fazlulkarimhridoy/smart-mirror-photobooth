@@ -16,7 +16,7 @@ const CountDown = () => {
     const [hideTimerNumber, setHideTimerNumber] = useState(false);
     const [showLoader, setShowLoader] = useState(false);
     const [showQRCode, setShowQRCode] = useState(false);
-    const [qrValue, setQrValue] = useState("Hellow world");
+    const [qrValue, setQrValue] = useState("");
     // const [bgImageUrl, setBgImageUrl] = useState(Bg);
 
     // Countdown logic
@@ -131,6 +131,11 @@ const CountDown = () => {
                     // setQrValue(dataURL);
                     // setBgImageUrl(dataURL);
                 });
+                const url = res.data.id;
+                const longUrl = "https:xri.com.bd/photobooth.html?q=" + url;
+                console.log(url);
+                console.log(longUrl);
+                setQrValue(longUrl);
             })
             .catch((err) => {
                 console.log("Error uploading image:", err);
